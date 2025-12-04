@@ -3,7 +3,7 @@ package org.maximum0.pattern.service;
 import org.maximum0.pattern.model.Price;
 
 /**
- * @FunctionalInterface: 가격 처리 로직을 위한 함수형 인터페이스.
+ * 가격 처리 로직을 위한 함수형 인터페이스.
  */
 @FunctionalInterface
 public interface PriceProcessor {
