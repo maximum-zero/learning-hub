@@ -120,3 +120,25 @@
 | :--- | :--- | :--- |
 | **`andThen(g)`** | `f` 실행 후 → `g` 실행 | **순차적** (파이프라인) |
 | **`compose(g)`** | `g` 실행 후 → `f` 실행 | **역순** |
+
+---
+
+### 5. 함수형 프로그래밍 디자인 패턴
+
+#### 디자인 패턴 분류
+
+| 유형 | 목적 |
+| :--- | :--- |
+| **생성 패턴** | 오브젝트의 생성에 관련된 패턴 (ex. Builder) |
+| **구조 패턴** | 상속을 이용해 클래스/오브젝트를 조합하여 더 발전된 구조로 만드는 패턴 (ex. Decorator) |
+| **행동 패턴** | 필요한 작업을 여러 객체에 분배하여 객체 간 결합도를 줄이는 패턴 (ex. Strategy, Template Method, Chain of Responsibility) |
+
+#### 함수형 디자인 패턴 구현 비교
+
+| 패턴 | 설명 | 예제 파일 |
+| :--- | :--- | :--- |
+| **Builder Pattern** | 객체의 **생성 로직**과 **표현 로직**을 분리하여 필드가 많은 객체의 생성 과정을 유연하게 만듭니다. | `BuilderPattern` |
+| **Strategy Pattern** | 런타임에 어떤 **전략**(행동)을 사용할지 선택할 수 있게 하고, 전략들을 캡슐화하여 간단하게 교체합니다. | `StrategyPattern` |
+| **Decorator Pattern** | 용도에 따라 객체에 **기능을 동적으로 계속 추가**할 수 있게 해줍니다. | `DecoratorPattern` |
+| **Template Method Pattern** | 상위 클래스가 **알고리즘의 뼈대**만을 정의하고, 가변적인 각 단계는 하위 클래스에게 정의를 위임하는 패턴입니다. | `TemplateMethodPattern` |
+| **Chain of Responsibility** | 명령을 처리할 객체들을 **체인으로 엮어** 명령을 순차적으로 처리하며, 새로운 처리 객체의 추가가 매우 간단합니다. | `ChainOfResponsibilityPattern` |
