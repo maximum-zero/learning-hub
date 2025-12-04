@@ -10,3 +10,16 @@
 | **Consumer<T>** | 값을 받아 소비 | `void accept(T t)` | `(x) -> System.out.println(x)` |
 | **Predicate<T>** | 조건 테스트  | `boolean test(T t)` | `x -> x > 0` |
 | **Comparator<T>** | 두 값을 비교 | `int compare(T t1, T t2)` | `(u1, u2) -> u1.getId() - u2.getId()` |
+
+---
+
+### 2. 메서드 참조
+
+**메서드 참조**는 람다식이 **기존 메서드를 단 하나만 호출**할 때, **`클래스::메서드`** 형태로 코드를 간결하게 줄이는 문법입니다.
+
+| 유형 | 문법 | 예제 파일 |
+| :--- | :--- | :--- |
+| **정적 메서드** | `클래스::Static메서드` | `BasicMethodReferences` |
+| **특정 객체 인스턴스** | `객체참조::인스턴스메서드` | `BasicMethodReferences` |
+| **임의 객체 인스턴스** | `클래스::인스턴스메서드` | `BasicMethodReferences` |
+| **생성자 참조** | `클래스::new` | `ConstructorReferenceFactory` |
