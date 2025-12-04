@@ -23,3 +23,62 @@
 | **특정 객체 인스턴스** | `객체참조::인스턴스메서드` | `BasicMethodReferences` |
 | **임의 객체 인스턴스** | `클래스::인스턴스메서드` | `BasicMethodReferences` |
 | **생성자 참조** | `클래스::new` | `ConstructorReferenceFactory` |
+
+---
+
+### 3. 스트림 API (Stream API)
+
+**스트림**은 **데이터 처리 연산을 지원하도록 소스에서 추출된 요소의 시퀀스**입니다.
+
+컬렉션이나 배열 같은 **데이터 소스 위를 파이프라인**과 같으며, 데이터를 저장하지 않고 함수적 방식으로 처리하는 도구입니다.
+
+| 특징 | 설명 |
+| :--- | :--- |
+| **Source** | 컬렉션, 배열 등 데이터의 출발점. |
+| **Intermediate Operation** | 스트림을 새로운 스트림 반환. **지연 연산**으로 실행되지 않음. |
+| **Terminal Operation** | 스트림을 닫고 결과를 반환. **실제 연산이 실행**됨. |
+
+#### 중간 연산 (Intermediate Operations)
+
+| 연산 | 역할 | 예제 파일 |
+| :--- | :--- | :--- |
+| **filter** | 조건(Predicate)에 맞는 요소만 선택 | `StreamFilterMap` |
+| **map** | 요소를 다른 형태/값(Function)으로 변환 | `StreamFilterMap` |
+| **flatMap** | 중첩된 구조(Stream in Stream)를 단일 스트림으로 평탄화 | `StreamFilterMap` |
+| **sorted** | 정렬 조건(Comparator)에 따라 요소 정렬 | `StreamSortedDistinct` |
+| **distinct** | 스트림에서 중복된 요소 제거 | `StreamSortedDistinct` |
+
+#### 최종 연산 (Terminal Operations)
+
+| 연산 | 역할 | 예제 파일 |
+| :--- | :--- | :--- |
+| **count** | 스트림의 요소 개수 계산 | `StreamAggregate` |
+| **sum** | 숫자형 스트림의 합계 계산 | `StreamAggregate` |
+| **max, min** | 최대/최소 값 검색 | `StreamAggregate` |
+| **allMatch** | 모든 요소가 조건을 만족하는지 확인 | `StreamSearchMatch` |
+| **anyMatch** | 하나라도 요소가 조건을 만족하는지 확인 | `StreamSearchMatch` |
+| **findFirst, findAny** | 첫 번째 또는 임의의 요소 검색 | `StreamSearchMatch` |
+| **reduce** | 스트림의 모든 요소를 단 하나의 결과로 축소 | `StreamReduce` |
+| **collect (toMap)** | 스트림을 Map 형태로 수집 | `StreamCollectMap` |
+| **collect (groupingBy)** | 스트림 요소를 특정 기준에 따라 그룹핑하여 Map으로 수집 | `StreamCollectGroup` |
+| **collect (partitioningBy)** | 스트림 요소를 boolean 기준으로 두 그룹으로 분할하여 Map으로 수집 | `StreamCollectGroup` |
+
+####  Optional
+
+**Optional**는 스트림의 **최종 연산** 결과가 **값이 있을 수도, 없을 수도 있음**을 안전하게 나타내는 **특수 컨테이너**입니다.
+
+`NullPointerException` 발생을 방지하기 위해 중간 연산과 최종 연산 사이에서 자주 활용됩니다.
+
+| 메서드 | 역할 |
+| :--- | :--- |
+| **isPresent()** | 값이 존재하는지 확인 (boolean) |
+| **orElse(), orElseGet()** | 값이 없을 때 기본값 제공 |
+| **ifPresent()** | 값이 있을 때만 특정 Consumer 실행 |
+
+#### Parallel Stream (병렬 처리)
+
+**병렬 처리**는 멀티 스레드를 활용하여 데이터 처리량을 높이는 기법이며, **Stream API**에서는 **`parallel()`** 메서드를 통해 이를 가능하게 합니다.
+
+* 내부적으로 **Fork/Join Pool**을 사용하여 전체 작업을 더 작은 작업으로 **분할**(Fork)하고, 각 작업을 병렬로 실행한 후 결과를 **병합**(Join)하여 최종 결과를 도출합니다.
+* 병렬화 및 병합에 드는 비용이 단순한 연산이나 적은 데이터 양에서는 **순차 스트림보다 오히려 느리게** 만들 수 있습니다.
+* 스트림 내부에서 **상태 변경**(State Mutation)을 시도할 경우, 여러 스레드가 동시에 접근하여 **동시성 문제**(Race Condition)를 일으킬 위험이 높습니다.
